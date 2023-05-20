@@ -50,6 +50,10 @@ module.exports = {
 
     return {
       VariableDeclaration(node) {
+        if (['.jsx', '.tsx'].some(ext => context.filename.endsWidth(ext))) {
+          return;
+        }
+
         if (node.kind === 'var') {
           context.report({
             message: 'prefer `let` over `var` to declare value bindings',
